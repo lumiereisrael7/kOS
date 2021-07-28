@@ -1,23 +1,71 @@
-#include "led.h"
+#include"led.h"
 
 
 
-
-void led_event(led_t led)
+void led_init(void)
 {
+    gpio_init();
+}
+
+
+
+void led_red_on(void)
+{
+
+   gpio_pin_on(LED_RED_GPIO5);
 
 }
 
 
-void led_on(led_t led, gpio_pin_t pin)
+void led_white_on(void)
 {
 
-    gpio_set_pin_output(pin);
+    gpio_pin_on(LED_WHITE_GPIO26);
 
 }
 
 
-void led_off(led_t led, gpio_pin_t pin)
+
+void led_blue_on(void)
 {
-    gpio_set_pin_input(pin);
+
+    gpio_pin_on(LED_BLUE_GPIO6);
+
 }
+
+void led_white_off(void)
+{
+    gpio_pin_off(LED_WHITE_GPIO26);
+}
+
+
+
+void led_red_off(void)
+{
+    gpio_pin_off(LED_RED_GPIO5);
+}
+
+
+
+void led_blue_off(void)
+{
+    gpio_pin_off(LED_BLUE_GPIO6);
+}
+
+
+/*
+void led_all_set(void)
+{
+    led_init();
+    led_red_on();
+    led_white_on();
+    led_blue_on();
+}
+*/
+/*
+void led_all_get(void)
+{
+
+}
+
+*/

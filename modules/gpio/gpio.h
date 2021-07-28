@@ -4,27 +4,39 @@
 #include "../base.h"
 
 #define GPIO_BASE  (PERIPHERAL_BASE + 0x200000)
-#define FS_MASK     (7)
+#define GPSET0      GPIO_BASE + 0x1c
+#define GPSET1      GPIO_BASE + 0x20 
+#define GPCLR0      GPIO_BASE + 0x28
+#define GPCLR1      GPIO_BASE + 0x2c
+#define GPPUD       GPIO_BASE + 0x94
+#define GPLEV0      GPIO_BASE + 0x34 
+#define GPLEV1      GPIO_BASE + 0x38
 
 
+typedef unsigned int reg_ro_t;
+typedef unsigned int reg_rw_t;
+typedef unsigned int reg_wo_t;
+
+#define      INPUT                 0
+#define      OUTPUT                1
+
+#define      GPIO_MAX_PIN         53
+
+#define      PULL_NONE             0
+#define      PULL_DOWN             1
+#define      PULL_UP               2
+
+
+#define      LED_RED_GPIO5         5
+
+#define      LED_BLUE_GPIO6        6
+
+#define      LED_WHITE_GPIO26    26
+
+/*
 typedef enum 
 {
-    FS_INPUT = 0,
-    FS_OUTPUT,
-    FS_ALT5,
-    FS_ALT4,
-    FS_ALT0,
-    FS_ALT1,
-    FS_ALT2,
-    FS_ALT3,
-} 
-gpio_alt_function_t;
-
-
-typedef enum 
-{
-    GPIO0 = 0,
-    GPIO1,
+    GPIO1=1,
     GPIO2,
     GPIO3,
     GPIO4,
@@ -77,82 +89,66 @@ typedef enum
     GPIO51,
     GPIO52,
     GPIO53,
+    GPIO54
 } 
 gpio_pin_t;
+*/
 
-
-
+/*
 typedef struct 
 {
-    rpi_reg_rw_t    GPFSEL0;
-    rpi_reg_rw_t    GPFSEL1;
-    rpi_reg_rw_t    GPFSEL2;
-    rpi_reg_rw_t    GPFSEL3;
-    rpi_reg_rw_t    GPFSEL4;
-    rpi_reg_rw_t    GPFSEL5;
-    rpi_reg_ro_t    Reserved0;
-    rpi_reg_wo_t    GPSET0;
-    rpi_reg_wo_t    GPSET1;
-    rpi_reg_ro_t    Reserved1;
-    rpi_reg_wo_t    GPCLR0;
-    rpi_reg_wo_t    GPCLR1;
-    rpi_reg_ro_t    Reserved2;
-    rpi_reg_wo_t    GPLEV0;
-    rpi_reg_wo_t    GPLEV1;
-    rpi_reg_ro_t    Reserved3;
-    rpi_reg_wo_t    GPEDS0;
-    rpi_reg_wo_t    GPEDS1;
-    rpi_reg_ro_t    Reserved4;
-    rpi_reg_wo_t    GPREN0;
-    rpi_reg_wo_t    GPREN1;
-    rpi_reg_ro_t    Reserved5;
-    rpi_reg_wo_t    GPFEN0;
-    rpi_reg_wo_t    GPFEN1;
-    rpi_reg_ro_t    Reserved6;
-    rpi_reg_wo_t    GPHEN0;
-    rpi_reg_wo_t    GPHEN1;
-    rpi_reg_ro_t    Reserved7;
-    rpi_reg_wo_t    GPLEN0;
-    rpi_reg_wo_t    GPLEN1;
-    rpi_reg_ro_t    Reserved8;
-    rpi_reg_wo_t    GPAREN0;
-    rpi_reg_wo_t    GPAREN1;
-    rpi_reg_ro_t    Reserved9;
-    rpi_reg_wo_t    GPAFEN0;
-    rpi_reg_wo_t    GPAFEN1;
-    rpi_reg_ro_t    Reserved10;
-    rpi_reg_wo_t    GPPUD;
-    rpi_reg_wo_t    GPPUDCLK0;
-    rpi_reg_wo_t    GPPUDCLK1;
-    rpi_reg_ro_t    Reserved11;
+    reg_rw_t    GPFSEL0;
+    reg_rw_t    GPFSEL1;
+    reg_rw_t    GPFSEL2;
+    reg_rw_t    GPFSEL3;
+    reg_rw_t    GPFSEL4;
+    reg_rw_t    GPFSEL5;
+    reg_ro_t    Reserved0;
+    reg_wo_t    GPSET0;
+    reg_wo_t    GPSET1;
+    reg_ro_t    Reserved1;
+    reg_wo_t    GPCLR0;
+    reg_wo_t    GPCLR1;
+    reg_ro_t    Reserved2;
+    reg_wo_t    GPLEV0;
+    reg_wo_t    GPLEV1;
+    reg_ro_t    Reserved3;
+    reg_wo_t    GPEDS0;
+    reg_wo_t    GPEDS1;
+    reg_ro_t    Reserved4;
+    reg_wo_t    GPREN0;
+    reg_wo_t    GPREN1;
+    reg_ro_t    Reserved5;
+    reg_wo_t    GPFEN0;
+    reg_wo_t    GPFEN1;
+    reg_ro_t    Reserved6;
+    reg_wo_t    GPHEN0;
+    reg_wo_t    GPHEN1;
+    reg_ro_t    Reserved7;
+    reg_wo_t    GPLEN0;
+    reg_wo_t    GPLEN1;
+    reg_ro_t    Reserved8;
+    reg_wo_t    GPAREN0;
+    reg_wo_t    GPAREN1;
+    reg_ro_t    Reserved9;
+    reg_wo_t    GPAFEN0;
+    reg_wo_t    GPAFEN1;
+    reg_ro_t    Reserved10;
+    reg_wo_t    GPPUD;
+    reg_wo_t    GPPUDCLK0;
+    reg_wo_t    GPPUDCLK1;
+    reg_ro_t    Reserved11;
 }
 gpio_t;
+*/
 
 
-enum {
-    GPIO_MAX_PIN       = 53,
-    GPIO_FUNCTION_OUT  = 1,
-    GPIO_FUNCTION_ALT5 = 2,
-    GPIO_FUNCTION_ALT3 = 7
-};
-
-
-typedef enum
-{
-    pull_none = 0,
-    pull_down = 1,
-    pull_up = 2
-}
-gpio_value_t;
-
-
-extern gpio_t* gpio_get(void);
-extern void gpio_set_pin_function(gpio_pin_t pin, gpio_alt_function_t function);
-extern void gpio_set_pin_output(gpio_pin_t pin);
-extern void gpio_set_pin_input(gpio_pin_t pin);
-extern gpio_value_t gpio_get_value(gpio_pin_t pin);
-extern void gpio_set_pin_up(gpio_pin_t pin);
-extern void gpio_set_pin_down(gpio_pin_t pin);
-extern void gpio_toggle_pin(gpio_pin_t pin);
+void gpio_init();
+unsigned int gpio_pin_configure(unsigned int pin, int function);
+void gpio_pin_on(unsigned int  pin);
+void gpio_pin_off(unsigned int pin);
+unsigned int  gpio_get_value(unsigned int pin);
+unsigned int gpio_pin_trigger(unsigned int pin, unsigned int  pull);
+void gpio_toggle_pin(unsigned int pin);
 
 #endif

@@ -1,12 +1,31 @@
-#include "./modules/led/led.h"
-#include "./modules/boot/boot.h"
+#include"app.h"
 
+volatile unsigned int tim;
 
 void boot_fired(void)
 {
-    led_on(led_rouge, GPIO16);
-    led_on(led_blanche, GPIO20);
-    led_on(led_bleue, GPIO21);
+    led_init();
+    led_white_on();
+    
+    for (tim = 0; tim < 50000000; tim++);
+    
+    led_white_off();
+    led_red_on();
+    
+    for (tim = 0; tim < 50000000; tim++);
+    
+    led_red_off();
+    led_blue_on();
+    
+    for (tim = 0; tim < 50000000; tim++);
+    
+    led_blue_off();
+    
+    for (tim = 0; tim < 50000000; tim++);
+    
+    led_white_on();
+    led_blue_on();
+    led_red_on();
 }
 
 

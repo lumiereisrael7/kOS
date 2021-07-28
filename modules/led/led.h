@@ -1,16 +1,25 @@
 #include "../boot/boot.h"
 #include"../gpio/gpio.h"
 
-typedef enum
-{
-    led_rouge,
-    led_bleue,
-    led_blanche
-} led_t;
 
 
-extern void led_event(led_t led);
+
+void led_init(void); // init gpio
+
+void led_red_on(void);
+void led_white_on(void);
+void led_blue_on(void);
 
 
-void led_on(led_t led, gpio_pin_t pin);
-void led_off(led_t led, gpio_pin_t pin);
+void led_red_off(void);
+void led_white_off(void);
+void led_blue_off(void);
+
+void led_all_set(void);  // position all led values
+void led_all_get(void);  //get status of all led
+
+
+void led_red_toggle(void);
+void led_white_toggle(void);
+void led_blue_toggle(void);
+

@@ -5,3 +5,5 @@
 
 
 extern void boot_fired(void);
+
+#endif

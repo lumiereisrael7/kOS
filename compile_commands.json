@@ -1,0 +1,27 @@
+[
+    {
+        "directory": "/media/lumiere/lise_data/myos",
+        "command": "clang      -c \"/media/lumiere/lise_data/myos/modules/uart/uart.c\"",
+        "file": "/media/lumiere/lise_data/myos/modules/uart/uart.c"
+    },
+    {
+        "directory": "/media/lumiere/lise_data/myos",
+        "command": "clang      -c \"/media/lumiere/lise_data/myos/modules/gpio/gpio.c\"",
+        "file": "/media/lumiere/lise_data/myos/modules/gpio/gpio.c"
+    },
+    {
+        "directory": "/media/lumiere/lise_data/myos",
+        "command": "clang      -c \"/media/lumiere/lise_data/myos/app.c\"",
+        "file": "/media/lumiere/lise_data/myos/app.c"
+    },
+    {
+        "directory": "/media/lumiere/lise_data/myos",
+        "command": "clang      -c \"/media/lumiere/lise_data/myos/modules/led/led.c\"",
+        "file": "/media/lumiere/lise_data/myos/modules/led/led.c"
+    },
+    {
+        "directory": "/media/lumiere/lise_data/myos",
+        "command": "clang      -c \"/media/lumiere/lise_data/myos/kernel/scheduler.c\"",
+        "file": "/media/lumiere/lise_data/myos/kernel/scheduler.c"
+    }
+]
