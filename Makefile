@@ -1,5 +1,5 @@
 GCCFLAGS = -Wall -O2 -ffreestanding -nostdinc -nostdlib -nostartfiles
-GCCPATH = /usr/gcc-arm-9.2-2019.12-x86_64-aarch64-none-elf/bin
+GCCPATH = /usr/local/gcc-arm-9.2-2019.12-x86_64-aarch64-none-elf/bin
 
 all: clean kernel8.img
 
