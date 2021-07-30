@@ -1,7 +1,7 @@
 #include"systimer.h"
 
 
-systimer_reg_t* sys_timer_base;
+systimer_reg_t* sys_timer_base = (systimer_reg_t*) SYSTIMER_BASE;
 
 
 systimer_reg_t* systimer_configure(void)

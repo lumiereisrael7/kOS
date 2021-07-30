@@ -44,21 +44,15 @@ unsigned int timer_new(unsigned int time)
 
 
 
-unsigned int timer_start(unsigned int timer)
+unsigned int timer_start(unsigned int id_timer, void (*cb) (void))
 {
-    if(timer < 0 || timer > 15)
+    if(id_timer < 0 || id_timer > 15)
         return -1;
 
-    systimer_wait_micro_seconds(timer_table[timer].time);
-
-    timer_table[timer].is_using = 0;
+    systimer_wait_micro_seconds(timer_table[id_timer].time);
+    (*cb)();
+    
+    timer_table[id_timer].is_using = 0;
 
     return 1;
-}
-
-
-
-unsigned int timer_register_cb(unsigned int id_time, void (*cb) (void))
-{
-    
 }

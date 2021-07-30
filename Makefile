@@ -18,11 +18,18 @@ led.o: modules/led/led.c
 	$(GCCPATH)/aarch64-none-elf-gcc $(GCCFLAGS) -c modules/led/led.c -o led.o
 
 
+systimer.o: modules/systimer/systimer.c
+	$(GCCPATH)/aarch64-none-elf-gcc $(GCCFLAGS) -c modules/systimer/systimer.c -o systimer.o
+
+timer.o: modules/timer/timer.c
+	$(GCCPATH)/aarch64-none-elf-gcc $(GCCFLAGS) -c modules/timer/timer.c -o timer.o
+
 app.o: app.c
 	$(GCCPATH)/aarch64-none-elf-gcc $(GCCFLAGS) -c app.c -o app.o
 
-kernel8.img: start.o gpio.o led.o app.o scheduler.o 
-	$(GCCPATH)/aarch64-none-elf-ld -nostdlib -nostartfiles start.o gpio.o led.o app.o scheduler.o -T linker.ld -o kernel8.elf
+
+kernel8.img: start.o gpio.o led.o app.o scheduler.o timer.o systimer.o 
+	$(GCCPATH)/aarch64-none-elf-ld -nostdlib -nostartfiles start.o gpio.o led.o app.o scheduler.o timer.o systimer.o -T linker.ld -o kernel8.elf
 	$(GCCPATH)/aarch64-none-elf-objcopy -O binary kernel8.elf kernel8.img
 
 clean:
