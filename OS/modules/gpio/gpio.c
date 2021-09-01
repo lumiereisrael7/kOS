@@ -1,15 +1,15 @@
 #include "gpio.h"
 
-
-
-
 // general function which apply some specfic operation
 unsigned int gpio_call(unsigned int pin, unsigned int value, unsigned int base, unsigned int field_size, unsigned int field_max) 
 {
     unsigned int field_mask = (1 << field_size) - 1;
   
-    if (pin > field_max) return 0;
-    if (value > field_mask) return 0; 
+    if (pin > field_max) 
+        return 0;
+    
+    if (value > field_mask) 
+        return 0; 
 
     unsigned int num_fields = 32 / field_size;
     unsigned int reg = base + ((pin / num_fields) * 4);
@@ -28,13 +28,13 @@ unsigned int gpio_call(unsigned int pin, unsigned int value, unsigned int base, 
 
 unsigned int gpio_set(unsigned int pin, unsigned int value) 
 { 
-  
+
         if ( (pin / 32) == 0  )
             return gpio_call(pin, value, GPSET0, 1, GPIO_MAX_PIN);
-    
+/*    
         else
             return gpio_call(pin, value, GPSET1, 1, GPIO_MAX_PIN);
-       
+*/       
 }
 
 
@@ -46,10 +46,10 @@ unsigned int gpio_clear (unsigned int pin, unsigned int value)
   
         if ( (pin / 32) == 0  )
             return gpio_call(pin, value, GPCLR0, 1, GPIO_MAX_PIN);
-    
+/*    
         else
             return gpio_call(pin, value, GPCLR1, 1, GPIO_MAX_PIN);
-     
+*/     
 }
 
 
@@ -137,7 +137,7 @@ void gpio_pin_on(unsigned int pin)
 void gpio_pin_off(unsigned int pin)
 {
     //gpio_pin_trigger(pin, PULL_NONE);
-     gpio_pin_configure(pin, INPUT);
+    gpio_pin_configure(pin, INPUT);
     gpio_clear(pin, 1);   
 }
 

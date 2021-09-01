@@ -3,6 +3,8 @@
 #include "../timer/timer.h"
 #include "entry.h"
 #include "peripherals/interrupt.h"
+#include "../led/led.h"
+#include  "../../tests/headers/test_led.h"
 
 const char *entry_error_messages[] = {
     "SYNC_INVALID_EL1t",
@@ -32,6 +34,7 @@ void enable_interrupt_controller()
     put32(TIMER_INT_CTRL_0, TIMER_INT_CTRL_0_VALUE);
 }
 
+
 void show_invalid_entry_message(int type, unsigned long esr, unsigned long address)
 {
     printf("%s, ESR: %x, address: %x\r\n", entry_error_messages[type], esr, address);
@@ -39,11 +42,14 @@ void show_invalid_entry_message(int type, unsigned long esr, unsigned long addre
 
 void handle_irq(void)
 {
+    //static unsigned int interval = 5 * 1000 * 1000;
     // Each Core has its own pending local intrrupts register
     unsigned int irq = get32(INT_SOURCE_0);
-    switch (irq) {
+    switch (irq) 
+    {
         case (GENERIC_TIMER_INTERRUPT):
-            handle_generic_timer_irq();
+            printf("\r\nDans la fonction handler irq:");
+            register_cb_for_light_up_led( timer_start, handle_irq_led);
             break;
         default:
             printf("Unknown pending irq: %x\r\n", irq);

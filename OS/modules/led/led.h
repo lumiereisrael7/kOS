@@ -1,7 +1,7 @@
 
 #include"../gpio/gpio.h"
 
-
+#include "printf.h"
 
 
 void led_init(void); // init gpio
@@ -24,4 +24,6 @@ void led_white_toggle(void);
 void led_blue_toggle(void);
 
 
-void event(void);
+void* handle_irq_led(void);
+
+

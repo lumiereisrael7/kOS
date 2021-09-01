@@ -53,14 +53,19 @@ irq_c.o: OS/modules/irq/irq.c
 printf.o: OS/printf.c
 	$(ARMGNU)-gcc $(COPS) -MMD -c OS/printf.c -o printf.o
 
+
+test_led.o: OS/tests/test_led.c
+	$(ARMGNU)-gcc $(COPS) -MMD -c OS/tests/test_led.c -o test_led.o
+
+
 app.o: OS/app/app.c
 	$(ARMGNU)-gcc $(COPS) -MMD -c OS/app/app.c -o app.o
 
 
-kernel8.img: start.o entry.o irq.o tim.o utils.o mm.o timer.o gpio.o led.o mini_uart.o app.o irq_c.o printf.o scheduler.o 
-	$(ARMGNU)-ld -nostdlib -nostartfiles start.o entry.o irq.o tim.o utils.o mm.o  timer.o gpio.o led.o mini_uart.o app.o irq_c.o printf.o scheduler.o -T OS/linker.ld -o kernel8.elf
+kernel8.img: start.o entry.o irq.o tim.o utils.o mm.o timer.o gpio.o led.o mini_uart.o app.o irq_c.o printf.o scheduler.o test_led.o
+	$(ARMGNU)-ld -nostdlib -nostartfiles start.o entry.o irq.o tim.o utils.o mm.o  timer.o gpio.o led.o mini_uart.o app.o irq_c.o printf.o scheduler.o test_led.o -T OS/linker.ld -o kernel8.elf
 	$(ARMGNU)-objcopy -O binary kernel8.elf kernel8.img
 
 clean:
-	/bin/rm kernel8.elf *.o *.img > /dev/null 2> /dev/null || true
+	/bin/rm kernel8.elf *.o *.d *.img > /dev/null 2> /dev/null || true
 

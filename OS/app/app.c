@@ -1,5 +1,7 @@
 #include"app.h"
 
+volatile unsigned int tim;
+
 void boot_fired(void)
 {
     led_init();
@@ -8,7 +10,4 @@ void boot_fired(void)
     led_red_on();
 }
 
-void enable_led_rotatly(void)
-{
-    
-}
+

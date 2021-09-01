@@ -1,6 +1,5 @@
 #include "scheduler.h"
 
-
 void kernel_main(void)
 {
 	uart_init();
@@ -14,10 +13,15 @@ void kernel_main(void)
 	enable_interrupt_controller();
 	enable_irq();
 
+	printf("\nBoot fired\n");
+	boot_fired();
+	printf("\nBoot fired end\n");
+
 
 	while (1) 
 	{
 		uart_send(uart_recv());
 	}
 }
+
 

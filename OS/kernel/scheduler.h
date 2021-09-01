@@ -6,6 +6,9 @@
 #include "../modules/irq/irq.h"
 #include "../modules/timer/timer.h"
 #include "../modules/mini_uart/mini_uart.h"
+#include "../tests/headers/test_led.h"
+#include "../app/app.h"
+
 
 
 #endif
