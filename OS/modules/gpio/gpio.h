@@ -5,21 +5,24 @@
 
 #include "utils.h"
 
-#define      INPUT                 0
-#define      OUTPUT                1
+#define      INPUT              0
+#define      OUTPUT             1
+#define      FUNC_ALT1          4
+#define      FUNC_ALT2          5
+#define      FUNC_ALT3          6
+#define      FUNC_ALT4          3
+#define      FUNC_ALT5          2
 
-#define      GPIO_MAX_PIN         53
+#define      GPIO_MAX_PIN       53
 
-#define      PULL_NONE             0
-#define      PULL_DOWN             1
-#define      PULL_UP               2
+#define      PULL_NONE          0
+#define      PULL_DOWN          1
+#define      PULL_UP            2
 
 
-#define      LED_RED_GPIO5         5
-
-#define      LED_BLUE_GPIO6        6
-
-#define      LED_WHITE_GPIO26    26
+#define      LED_RED_GPIO5      5
+#define      LED_BLUE_GPIO6     6
+#define      LED_WHITE_GPIO26   26
 
 
 
